@@ -1,0 +1,247 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Misteri Pendakian — Pendaki Ketujuh</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#090b0e;color:#eee;font-family:Arial,sans-serif}
+button{cursor:pointer;color:inherit;font-size:14px}
+header{padding:18px 15px;background:#11151b;border-bottom:1px solid #333}
+header h2{margin:0;font-size:20px;letter-spacing:1px}
+header p{color:#aaa;font-size:12px;margin:7px 0 0}
+.status{color:#e15b64;font-size:11px;margin-top:9px}
+nav{display:flex;gap:5px;padding:9px;background:#101318;position:sticky;top:0;z-index:2}
+nav button{flex:1;padding:10px 2px;border:1px solid #30343c;border-radius:8px;background:#191d24}
+nav button.active{background:#6c2028;border-color:#a8444c}
+main{padding:14px;max-width:650px;margin:auto}
+.panel{display:none}
+.panel.active{display:block}
+.notice{background:#171a20;border:1px solid #333;border-radius:12px;padding:13px;margin-bottom:13px;font-size:12px;color:#bbb}
+.chat{height:47vh;min-height:300px;max-height:480px;overflow:auto;background:#0d1014;border:1px solid #272c33;border-radius:12px;padding:12px}
+.msg{max-width:86%;padding:10px 12px;margin:9px 0;background:#20252c;border-radius:3px 12px 12px 12px;font-size:14px;line-height:1.5;overflow-wrap:anywhere}
+.msg small{display:block;color:#d4a0a4;font-size:11px;margin-bottom:4px}
+.msg.me{margin-left:auto;background:#174e42;border-radius:12px 3px 12px 12px}
+.msg.system{margin:12px auto;text-align:center;background:#242127;color:#d8a6a6;font-size:12px;border-radius:8px}
+form{display:flex;gap:6px;margin-top:9px}
+input{min-width:0;flex:1;background:#181c22;border:1px solid #363b43;border-radius:9px;padding:12px;color:white;font-size:14px}
+.btn{border:0;background:#922f39;padding:11px 13px;border-radius:9px}
+.secondary{background:#252b33;border:1px solid #454b54;border-radius:9px;padding:11px}
+h3{font-size:16px}
+.person{display:flex;align-items:center;gap:11px;background:#151920;border:1px solid #30343b;padding:12px;border-radius:10px;margin:8px 0;text-align:left;width:100%}
+.avatar{width:43px;height:43px;display:grid;place-items:center;border-radius:50%;background:#34303b;font-size:21px}
+.person span:last-child{color:#aaa;font-size:12px}
+.story{background:#151920;border:1px solid #35313a;border-radius:12px;padding:15px;margin:12px 0;line-height:1.7}
+.choice{display:block;width:100%;text-align:left;background:#20252d;border:1px solid #454b54;padding:13px;border-radius:9px;margin:9px 0}
+.choice:active{background:#64242d}
+.call{background:#101319;border:1px solid #383d45;border-radius:16px;padding:25px 15px;text-align:center}
+.big{font-size:56px;margin:20px}
+#gallery{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.photo{min-height:135px;display:flex;align-items:center;justify-content:center;text-align:center;padding:15px;background:linear-gradient(145deg,#22252c,#08090c);border:1px solid #45404a;border-radius:10px;color:#d3c4c6}
+footer{text-align:center;padding:24px;color:#6e727a;font-size:11px}
+</style>
+</head>
+<body>
+<header>
+<h2>⛰ MISTERI PENDAKIAN</h2>
+<p>PENDAKI KETUJUH · EPISODE 01</p>
+<div class="status">● SINYAL TIDAK STABIL — 07 ONLINE</div>
+</header>
+<nav>
+<button class="active" onclick="tab('group',this)">Grup</button>
+<button onclick="tab('private',this)">Pribadi</button>
+<button onclick="tab('call',this)">Telepon</button>
+<button onclick="tab('gallery',this)">Galeri</button>
+<button onclick="tab('story',this)">Cerita</button>
+</nav>
+<main>
+<section id="group" class="panel active">
+<div class="notice">WhatsApp · Grup: <b>Rombongan Pendakian 🏕</b><br>7 anggota · Pesan terakhir 23.47</div>
+<div class="chat" id="groupchat">
+<div class="msg system">Grup dibuat oleh Rifki</div>
+<div class="msg"><small>Rifki</small>Teman-teman, semuanya sudah sampai tenda?</div>
+<div class="msg"><small>Salwa</small>Aku sama Jevlin sudah. Tapi tadi dengar suara orang dari arah hutan.</div>
+<div class="msg"><small>Jevlin</small>Aku juga dengar. Kayak ada yang manggil nama Salwa.</div>
+<div class="msg"><small>Erik</small>Jangan bercanda. Kita berenam di sini, kan?</div>
+<div class="msg"><small>Mixel</small>Iya. Aku sama Dea di tenda sebelah. Tenang aja.</div>
+<div class="msg"><small>Dea</small>Mixel... kamu tadi dengar suara dari tenda kita nggak?</div>
+<div class="msg system">23.47 · Nomor tidak dikenal bergabung dengan grup</div>
+<div class="msg"><small>+07</small>JANGAN HITUNG KALIAN. HITUNG BAYANGAN DI BELAKANG KALIAN.</div>
+<div class="msg system">Nomor +07 keluar dari grup</div>
+</div>
+<form onsubmit="sendGroup(event)">
+<input id="message" placeholder="Ketik pesan..." autocomplete="off">
+<button class="btn">Kirim</button>
+</form>
+<button class="secondary" style="width:100%;margin-top:9px" onclick="nextGroup()">▶ Lanjutkan percakapan</button>
+</section>
+
+<section id="private" class="panel">
+<h3>Pesan pribadi</h3>
+<button class="person" onclick="openDM('Salwa')"><span class="avatar">🌙</span><span><b>Salwa</b><br>Jevlin, aku takut...</span></button>
+<button class="person" onclick="openDM('Mixel')"><span class="avatar">🕯️</span><span><b>Mixel</b><br>Aku menyembunyikan sesuatu.</span></button>
+<button class="person" onclick="openDM('+07')"><span class="avatar">👁️</span><span><b>+07 (Tidak dikenal)</b><br>Pesan baru</span></button>
+<div class="chat" id="dmchat" style="height:270px;min-height:220px">
+<div class="msg system">Pilih percakapan di atas.</div>
+</div>
+<form onsubmit="sendDM(event)">
+<input id="dmmessage" placeholder="Balas pesan..." autocomplete="off">
+<button class="btn">Kirim</button>
+</form>
+</section>
+
+<section id="call" class="panel">
+<h3>Panggilan masuk</h3>
+<div class="call">
+<div class="big" id="callericon">📵</div>
+<h2 id="caller">Nomor Tidak Dikenal</h2>
+<p id="callstatus" style="color:#aaa">23.59 · Sinyal lemah</p>
+<button class="btn" onclick="answerCall()">☎ Jawab</button>
+<button class="secondary" onclick="missCall()">Tolak</button>
+<div id="calltext" class="story">Ponselmu bergetar. Nomor +07 menelepon lagi...</div>
+<button class="secondary" onclick="playSound()" style="margin-top:8px">🔊 Putar suara misterius</button>
+</div>
+<p style="font-size:12px;color:#999">Efek suara dibuat oleh browser. Gunakan tombol suara untuk mendengarkan nada misterius.</p>
+</section>
+
+<section id="gallery" class="panel">
+<h3>Galeri ponsel 📷</h3>
+<p style="color:#aaa;font-size:12px">File terakhir yang tersimpan sebelum sinyal hilang.</p>
+<div id="gallery">
+<div class="photo" onclick="photo(0)">🌲<br>IMG_001<br>Jalur pendakian</div>
+<div class="photo" onclick="photo(1)">⛺<br>IMG_002<br>Tenda malam</div>
+<div class="photo" onclick="photo(2)">👤<br>IMG_003<br>Bayangan ketujuh</div>
+<div class="photo" onclick="photo(3)">📱<br>IMG_004<br>Foto dari +07</div>
+</div>
+<div id="photodetail" class="story" style="display:none"></div>
+</section>
+
+<section id="story" class="panel">
+<h3>Bab 1 — Orang yang Tidak Dihitung</h3>
+<div class="story" id="narrative">Kabut turun sebelum tengah malam. Enam pendaki berkumpul di dekat tenda, tetapi dari arah hutan terdengar tujuh langkah kaki. Rifki menghitung teman-temannya sekali lagi. Enam orang. Lalu siapa yang berdiri tepat di belakang Dea?</div>
+<div id="choices">
+<button class="choice" onclick="choose(0)">A. Rifki menoleh ke belakang Dea.</button>
+<button class="choice" onclick="choose(1)">B. Jevlin mengajak Salwa masuk ke tenda.</button>
+<button class="choice" onclick="choose(2)">C. Mixel memeriksa ponsel Dea yang menyala sendiri.</button>
+</div>
+<div id="result" class="story" style="display:none"></div>
+<button class="secondary" onclick="resetStory()">↻ Ulangi bab</button>
+</section>
+</main>
+<footer>FIKSI INTERAKTIF · MISTERI PENDAKIAN<br>Jangan mendaki sendirian di dunia nyata.</footer>
+
+<script>
+function tab(id,button){
+document.querySelectorAll('.panel').forEach(x=>x.classList.remove('active'));
+document.getElementById(id).classList.add('active');
+document.querySelectorAll('nav button').forEach(x=>x.classList.remove('active'));
+button.classList.add('active');
+}
+function addMsg(box,name,msg,me=false){
+let el=document.createElement('div');
+el.className='msg'+(me?' me':'');
+let n=document.createElement('small');n.textContent=name;
+el.appendChild(n);el.appendChild(document.createTextNode(msg));
+box.appendChild(el);box.scrollTop=box.scrollHeight;
+}
+function sendGroup(e){
+e.preventDefault();
+let input=document.getElementById('message');
+let v=input.value.trim();if(!v)return;
+addMsg(document.getElementById('groupchat'),'Kamu',v,true);
+input.value='';
+}
+let groupStep=0;
+const events=[
+['Erik','Gue hitung ada enam orang. Tapi bayangan di dekat pohon ada tujuh.'],
+['Dea','Mixel, jangan buka tenda dulu. Ada seseorang berdiri di luar.'],
+['Rifki','SEMUA MASUK TENDA SEKARANG. JANGAN JAWAB KALAU ADA YANG MEMANGGIL.'],
+['+07','TERLAMBAT. SALAH SATU DARI KALIAN SUDAH MEMBUKA PINTU.']
+];
+function nextGroup(){
+if(groupStep<events.length){
+let e=events[groupStep++];
+addMsg(document.getElementById('groupchat'),e[0],e[1]);
+}else{
+addMsg(document.getElementById('groupchat'),'Sistem','Tidak ada sinyal. Pesan gagal dikirim.');
+}
+}
+let dmName='';
+function openDM(name){
+dmName=name;
+let box=document.getElementById('dmchat');box.innerHTML='';
+const data={
+'Salwa':['Jevlin, kamu masih bangun?','Ada suara nangis di luar tenda. Tapi semua orang bilang mereka tidak mendengarnya.'],
+'Mixel':['Aku dan Dea melanggar satu larangan di jalur itu.','Kami mengikuti suara seseorang yang memanggil dari balik kabut. Sejak itu ada yang mengikuti kami.'],
+'+07':['KAMU SUDAH MENGHITUNG ENAM KALI.','LIHAT FOTO TERAKHIR. KALIAN TIDAK PERNAH BERENAM.']
+};
+(data[name]||[]).forEach(t=>addMsg(box,name,t));
+}
+function sendDM(e){
+e.preventDefault();
+let i=document.getElementById('dmmessage'),v=i.value.trim();if(!v)return;
+addMsg(document.getElementById('dmchat'),'Kamu',v,true);i.value='';
+setTimeout(()=>{
+let replies={
+'Salwa':'Aku mendengar langkah kaki lagi. Tolong jangan tinggalkan aku.',
+'Mixel':'Jangan percaya semua yang kamu lihat di galeri.',
+'+07':'AKU ADA DI BELAKANGMU.'
+};
+addMsg(document.getElementById('dmchat'),dmName||'Tidak dikenal',replies[dmName]||'Pesan diterima. Sinyal menghilang.');
+},700);
+}
+function answerCall(){
+document.getElementById('callericon').textContent='📞';
+document.getElementById('caller').textContent='+07';
+document.getElementById('callstatus').textContent='Terhubung · 00:07';
+document.getElementById('calltext').textContent='Terdengar napas berat, langkah kaki, lalu suara berbisik: "Jangan hitung aku..."';
+playSound();
+}
+function missCall(){
+document.getElementById('callericon').textContent='📵';
+document.getElementById('callstatus').textContent='Panggilan tak terjawab';
+document.getElementById('calltext').textContent='Satu pesan suara masuk dari nomor +07.';
+}
+function playSound(){
+try{
+const C=window.AudioContext||window.webkitAudioContext;
+const c=new C(),o=c.createOscillator(),g=c.createGain();
+o.type='sine';o.frequency.setValueAtTime(390,c.currentTime);
+o.frequency.exponentialRampToValueAtTime(90,c.currentTime+1.4);
+g.gain.setValueAtTime(.0001,c.currentTime);
+g.gain.exponentialRampToValueAtTime(.15,c.currentTime+.1);
+g.gain.exponentialRampToValueAtTime(.0001,c.currentTime+1.5);
+o.connect(g);g.connect(c.destination);o.start();o.stop(c.currentTime+1.5);
+}catch(e){alert('Browser tidak mendukung efek suara.');}
+}
+const photos=[
+'Foto jalur berkabut. Ada jejak kaki yang berhenti tepat di depan pohon.',
+'Di belakang tenda tampak siluet seseorang, padahal semua anggota berada di dalam.',
+'Foto ini menampilkan tujuh bayangan. Satu bayangan tidak memiliki pemilik.',
+'Pesan dari nomor +07: "AKU SUDAH DI DALAM TENDA."'
+];
+function photo(n){
+let d=document.getElementById('photodetail');
+d.style.display='block';d.textContent=photos[n];
+}
+function choose(n){
+let texts=[
+'Rifki menoleh. Tidak ada siapa pun. Namun ponselnya menampilkan foto baru: wajahnya sendiri sedang berdiri di belakang Dea. Foto itu bertanggal besok.',
+'Jevlin menggandeng Salwa masuk. Dari dalam tenda, mereka mendengar suara Jevlin memanggil Salwa dari luar. Salwa menatap Jevlin yang berdiri di sampingnya.',
+'Mixel membuka galeri Dea. Ada video berdurasi tujuh detik. Dalam video, mereka berenam duduk di tenda, sementara seseorang di luar menghitung: satu, dua, tiga, empat, lima, enam... lalu tujuh.'
+];
+document.getElementById('result').style.display='block';
+document.getElementById('result').textContent=texts[n];
+document.getElementById('narrative').textContent='Keputusanmu telah mengubah jalannya cerita.';
+document.getElementById('choices').style.display='none';
+}
+function resetStory(){
+document.getElementById('narrative').textContent='Kabut turun sebelum tengah malam. Enam pendaki berkumpul di dekat tenda, tetapi dari arah hutan terdengar tujuh langkah kaki. Rifki menghitung teman-temannya sekali lagi. Enam orang. Lalu siapa yang berdiri tepat di belakang Dea?';
+document.getElementById('choices').style.display='block';
+document.getElementById('result').style.display='none';
+}
+</script>
+</body>
+</html>
